@@ -19,12 +19,6 @@ get ("/square/results") do
   erb(:square_results)
 end
 
-  #@the_num = params.fetch("users_number").to_f
-
- # @the_result = @the_num ** 2
-
-#erb(:square_results)
-#end
 
 get("/") do
   "
