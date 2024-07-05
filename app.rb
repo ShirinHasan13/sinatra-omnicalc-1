@@ -29,6 +29,24 @@ get ("/square_root/results") do
  erb(:squareroot_results)
 end
 
+get("/payment/new") do
+  erb(:new_payment_calc)
+end
+
+get ("/payment/results") do
+  @apr = params.fetch("user_apr").to_f 
+  @apr2 = @apr / 12/ 100
+  @years = params.fetch("user_years").to_f 
+  @years2 = @years * 12
+  @pv = params.fetch("user_pv").to_f 
+  @numerator = @pv * @apr2 * (1 + @apr2)** @years2
+  @denominator = (1 + @apr2)**@years2 - 1
+  @payment = @numerator / @denominator
+  
+ erb(:payment_results)
+end
+
+
 get("/") do
   "
   <h1>Welcome to your Sinatra App!</h1>
