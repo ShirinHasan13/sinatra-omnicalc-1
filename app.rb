@@ -46,6 +46,19 @@ get ("/payment/results") do
  erb(:payment_results)
 end
 
+get ("/random/new") do
+  erb(:new_random_calc)
+  end
+
+  get ("/random/results") do
+    
+  @Min= rand(-1..50)
+  
+  @Max = rand(51..1000)
+  @random = rand(@Min..@Max)
+    
+   erb(:random_results)
+  end
 
 get("/") do
   "
