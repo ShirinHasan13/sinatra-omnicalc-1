@@ -36,15 +36,15 @@ end
 get ("/payment/results") do
   @apr = params.fetch("user_apr").to_f
   @apr3 = @apr.to_fs(:percentage, { :delimiter => ".", :precision => 4} )
- # @apr3 = @apr(:percentage, { :delimiter => ".", :precision => 4} )
-  
   @apr2 = @apr / 12/ 100
-  @years = params.fetch("user_years").to_f 
+  @years = params.fetch("user_years").to_i 
   @years2 = @years * 12
   @pv = params.fetch("user_pv").to_f 
+  @pv2 = @pv.to_fs(:currency, { :precision => 2 }) 
   @numerator = @pv * @apr2 * (1 + @apr2)** @years2
   @denominator = (1 + @apr2)**@years2 - 1
   @payment = @numerator / @denominator
+  @payment2 = @payment.to_fs(:currency, { :precision => 2 }) 
   
  erb(:payment_results)
 end
